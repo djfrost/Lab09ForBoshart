@@ -1,8 +1,8 @@
 AutomatedMakefile = am
 CC = g++
 
-FILES = 
-EXECUTABLE = 
+FILES = Plot.o Point.o Points.o QuickTest.o 
+EXECUTABLE = QuickTest.exe
 
 PROJECT_PATH = $(PROJECT_DIR)
 GTK_PATH = /$(DRIVE_LETTER)/MinGW/GTK
@@ -18,6 +18,13 @@ LINK = $(CC) $(LIB_DIRS) -o
 all: Lab09
 
 Lab09: 		$(FILES)
-		$(LINK) $(EXECUTABLE) $(FILES) $(LIBS)	
-
-
+		$(LINK) $(EXECUTABLE) $(FILES) $(LIBS)
+		
+Plot.o: Plot.cpp Plot.h
+		$(COMPILE) Plot.cpp
+Point.o: Point.cpp Point.h
+		$(COMPILE) Point.cpp 
+Points.o: Points.cpp Points.h
+		$(COMPILE) Points.cpp
+QuickTest.o: QuickTest.cpp Points.cpp Points.h Point.cpp Point.h Sort.h  Plot.cpp Plot.h
+			$(COMPILE) QuickTest.cpp 
