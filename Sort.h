@@ -35,16 +35,13 @@ T** Sort<T>::quickSort(T** items, int numItems, int (*compare) (T* one, T* two))
    //DO THIS
    //create a new array that will be sorted and returned
    //this is in case the original, unsorted array is also needed
-   
-   
-   _quickSort(items, 
+   T** newItems = items;
+   _quickSort(newItems, 0, numItems, compare);
 
 
 
 
-
-
-
+   return newItems;
 }
 
 template < class T >
@@ -118,13 +115,13 @@ void Sort<T>::choosePivot(T** items, int first, int last)
    //DO THIS
    //find a better item to be the partition than simply using the item in the first index
    //you will need to swap
-
-
-
-
-
-
-
+   T* temp;
+   
+   int index_partition = (last - first)/2;
+   temp = items[index_partition];
+   items[index_parition] = items[first];
+   items[first] = temp;
+   //yet something tells me that a search might go here instead
 }
 
 //no work below this point
