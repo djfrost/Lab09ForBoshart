@@ -1,8 +1,8 @@
 AutomatedMakefile = am
 CC = g++
 
-FILES = Plot.o Point.o Points.o QuickTest.o 
-EXECUTABLE = QuickTest.exe
+FILES = Plot.o Point.o Points.o SortPlot.o 
+EXECUTABLE = SortPlot.exe
 
 PROJECT_PATH = $(PROJECT_DIR)
 GTK_PATH = /$(DRIVE_LETTER)/MinGW/GTK
@@ -27,4 +27,7 @@ Point.o: Point.cpp Point.h
 Points.o: Points.cpp Points.h
 		$(COMPILE) Points.cpp
 QuickTest.o: QuickTest.cpp Points.cpp Points.h Point.cpp Point.h Sort.h  Plot.cpp Plot.h
-			$(COMPILE) QuickTest.cpp 
+			$(COMPILE) QuickTest.cpp
+
+SortPlot.o:		SortPlot.cpp SortPlot.h Sort.h
+			$(COMPILE) SortPlot.cpp
