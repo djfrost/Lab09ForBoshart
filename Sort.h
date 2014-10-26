@@ -58,15 +58,6 @@ void Sort<T>::_quickSort(T** items, int first, int last, int (*compare) (T* one,
 		_quickSort(items, first, pivotIndex - 1, compare);
 		_quickSort(items, pivotIndex + 1, last, compare);
 
-
-
-
-
-
-
-
-
-
    }  
 }  
 
@@ -84,17 +75,19 @@ int Sort<T>::partition(T** items, int first, int last, int (*compare) (T* one, T
 	choosePivot(items, first, last); 
 	for(int count = first+1; count <= last; count++)
 	{
-		//compare store as int
-		// if compare < 0 increment lastsl
-		//{
-		// swap lastS1 with count
-		// 
-		//swap element of lastS1 with pivot
-	
+		int compare = (*compare) (items[pivot], items[lastS1]);
+		if ( compare < 0)
+		{
+			temp = items[count];
+			items[count] = items[lastS1];
+			items[lastS1] = temp;
+		
+		}
 	
 	}
-	// swap lastS1 with pivot
-	//return lastS1
+	temp = items[temp];
+	items[temp] = items[lastS1]
+	items[lastS1] = temp;
 }
 
 template < class T >
@@ -109,7 +102,7 @@ void Sort<T>::choosePivot(T** items, int first, int last)
    temp = items[index_partition];
    items[index_parition] = items[first];
    items[first] = temp;
-   //yet something tells me that a search might go here instead
+   
 }
 
 //no work below this point
