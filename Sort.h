@@ -40,9 +40,7 @@ T** Sort<T>::quickSort(T** items, int numItems, int (*compare) (T* one, T* two))
    //this is in case the original, unsorted array is also needed
    T** sorted = items; // new numitems
    //for to set items equal
-   cout << "presort" << endl;
-   _quickSort(sorted, 0, numItems, compare);
-   cout << "postsort" << endl;	
+   _quickSort(sorted, 0, numItems, compare);	
 
 
 
@@ -58,13 +56,9 @@ void Sort<T>::_quickSort(T** items, int first, int last, int (*compare) (T* one,
    //make the necessary partition and recursive calls for quick sort
    if (first < last)
    {
-        cout << "prepartition" << endl;
 		pivotIndex = partition(items, first, last, compare);
-		cout << "postpartition" << endl;
 		_quickSort(items, first, pivotIndex - 1, compare);
-		cout << "first partition" << endl;
 		_quickSort(items, pivotIndex + 1, last, compare);
-        cout << "second partition" << endl;
    }  
 }  
 
@@ -79,9 +73,7 @@ int Sort<T>::partition(T** items, int first, int last, int (*compare) (T* one, T
 	//initially, choosePivot does nothing           
 	int pivot = first;
 	int lastS1 = pivot;
-	cout << "pre choosePivot" << endl;
 	choosePivot(items, first, last);
-	cout << "post choosePivot" << endl;
 	for(int count = first+1; count <= last; count++)
 	{
 		int compare_items = (*compare)(items[pivot], items[lastS1]);

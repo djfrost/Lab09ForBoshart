@@ -6,9 +6,6 @@ using CSC2110::ListArrayIterator;
 #include "CD.h"
 using CSC2110::CD;
 
-#include <iostream>
-using namespace std;
-
 void deleteCDs(ListArray<CD>* list)
 {
    ListArrayIterator<CD>* iter = list->iterator();
@@ -28,9 +25,7 @@ int main()
 
    CD** cds = list->toArray();
    int size = list->size();
-   cout << "prearray" << endl;
    CD** sorted = Sort<CD>::quickSort(cds, size, &CD::compare_items);
-   cout << "postarray" << endl;
    for (int i = 0; i < size; i++)
    {
       CD* cd = sorted[i];
