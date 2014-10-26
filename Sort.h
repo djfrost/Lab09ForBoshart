@@ -1,6 +1,9 @@
 #if !defined (SORT_H)
 #define SORT_H
 
+#include <iostream>
+using namespace std;
+
 template < class T >
 class Sort
 {
@@ -37,8 +40,9 @@ T** Sort<T>::quickSort(T** items, int numItems, int (*compare) (T* one, T* two))
    //this is in case the original, unsorted array is also needed
    T** sorted = items; // new numitems
    //for to set items equal
+   cout << "presort" << endl;
    _quickSort(sorted, 0, numItems, compare);
-	
+   cout << "postsort" << endl;	
 
 
 
@@ -54,10 +58,13 @@ void Sort<T>::_quickSort(T** items, int first, int last, int (*compare) (T* one,
    //make the necessary partition and recursive calls for quick sort
    if (first < last)
    {
+        cout << "prepartition" << endl;
 		pivotIndex = partition(items, first, last, compare);
+		cout << "postpartition" << endl;
 		_quickSort(items, first, pivotIndex - 1, compare);
+		cout << "first partition" << endl;
 		_quickSort(items, pivotIndex + 1, last, compare);
-
+        cout << "second partition" << endl;
    }  
 }  
 
@@ -72,11 +79,13 @@ int Sort<T>::partition(T** items, int first, int last, int (*compare) (T* one, T
 	//initially, choosePivot does nothing           
 	int pivot = first;
 	int lastS1 = pivot;
-	choosePivot(items, first, last); 
+	cout << "pre choosePivot" << endl;
+	choosePivot(items, first, last);
+	cout << "post choosePivot" << endl;
 	for(int count = first+1; count <= last; count++)
 	{
-		int compare = (*compare) (items[pivot], items[lastS1]);
-		if ( compare < 0)
+		int compare_items = (*compare)(items[pivot], items[lastS1]);
+		if (compare_items < 0)
 		{
 			temp = items[count];
 			items[count] = items[lastS1];
@@ -85,9 +94,11 @@ int Sort<T>::partition(T** items, int first, int last, int (*compare) (T* one, T
 		}
 	
 	}
-	temp = items[temp];
-	items[temp] = items[lastS1]
+	temp = items[pivot];
+	items[pivot] = items[lastS1];
 	items[lastS1] = temp;
+	cout << pivot << endl;
+	cout << lastS1 << endl;
 }
 
 template < class T >
@@ -97,10 +108,13 @@ void Sort<T>::choosePivot(T** items, int first, int last)
    //find a better item to be the partition than simply using the item in the first index
    //you will need to swap
    T* temp;
+   cout << first << endl;
+   cout << last << endl;
 
    int index_partition = first+(last - first)/2;
+   cout << index_partition << endl;
    temp = items[index_partition];
-   items[index_parition] = items[first];
+   items[index_partition] = items[first];
    items[first] = temp;
    
 }
