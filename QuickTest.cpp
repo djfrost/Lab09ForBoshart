@@ -17,7 +17,7 @@ void deleteCDs(ListArray<CD>* list)
    }
 
    delete iter;
-}
+} 
 
 int main()
 {

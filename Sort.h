@@ -39,6 +39,10 @@ T** Sort<T>::quickSort(T** items, int numItems, int (*compare) (T* one, T* two))
    //create a new array that will be sorted and returned
    //this is in case the original, unsorted array is also needed
    T** sorted = items; // new numitems
+   for (int i =0; i < numItems; i++)
+   {
+		sorted[i] = items[i];
+   }
    //for to set items equal
    _quickSort(sorted, 0, numItems, compare);	
 
@@ -50,15 +54,13 @@ T** Sort<T>::quickSort(T** items, int numItems, int (*compare) (T* one, T* two))
 template < class T >
 void Sort<T>::_quickSort(T** items, int first, int last, int (*compare) (T* one, T* two))
 {
-   int pivotIndex;
-
    //DO THIS
    //make the necessary partition and recursive calls for quick sort
-   if (first < last)
+   if (first <= last)
    {
-		pivotIndex = partition(items, first, last, compare);
-		_quickSort(items, first, pivotIndex - 1, compare);
-		_quickSort(items, pivotIndex + 1, last, compare);
+		int pivotIndex = partition(items, first, last, compare);
+		_quickSort(items, first, (pivotIndex - 1), compare);
+		_quickSort(items, (pivotIndex + 1), last, compare);
    }  
 }  
 
@@ -73,24 +75,22 @@ int Sort<T>::partition(T** items, int first, int last, int (*compare) (T* one, T
 	//initially, choosePivot does nothing           
 	int pivot = first;
 	int lastS1 = pivot;
-	choosePivot(items, first, last);
-	for(int count = first+1; count <= last; count++)
+	choosePivot(items, first, last);	
+	for(int count = first+1; count < last; count++)
 	{
-		int compare_items = (*compare)(items[pivot], items[lastS1]);
+		int compare_items = (*compare)(items[count], items[pivot]);
 		if (compare_items < 0)
 		{
-			temp = items[count];
-			items[count] = items[lastS1];
-			items[lastS1] = temp;
-		
+			lastS1++;
+			temp = items[lastS1];
+			items[lastS1] = items[count];
+			items[count] = temp;
 		}
-	
 	}
 	temp = items[pivot];
 	items[pivot] = items[lastS1];
 	items[lastS1] = temp;
-	cout << pivot << endl;
-	cout << lastS1 << endl;
+	return lastS1;
 }
 
 template < class T >
@@ -100,11 +100,7 @@ void Sort<T>::choosePivot(T** items, int first, int last)
    //find a better item to be the partition than simply using the item in the first index
    //you will need to swap
    T* temp;
-   cout << first << endl;
-   cout << last << endl;
-
    int index_partition = first+(last - first)/2;
-   cout << index_partition << endl;
    temp = items[index_partition];
    items[index_partition] = items[first];
    items[first] = temp;
